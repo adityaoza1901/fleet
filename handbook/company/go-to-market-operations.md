@@ -150,6 +150,9 @@ Fleet uses advertising to spread awareness through a broader audience and foster
 
 We sponsor and participate in events so that we can support, connect, engage, and grow the Fleet community. We need to be thoughtful about what events we sponsor or host, and we need to be disciplined in how we run events so we can be efficient and effective.
 
+> Want to propose an event:  
+> Add a row to the ["🫧 Proposed events (not yet settled)" tab](https://docs.google.com/spreadsheets/d/1YQXAX2Q_WnGkAwMYjMbQpV3nbCj7gOBbv7Y0u4twxzQ/edit?gid=1411322737#gid=1411322737) of the 🎪 Events spreadsheet (confidential doc) and fill in all necessary information.
+
 
 ### Field event follow-up
 
@@ -225,7 +228,7 @@ ADRs research accounts to ensure there's a practical need Fleet can solve before
 
 ## Warm-up actions
 
-Warm-up actions are that Fleet will take at any point in time to help move the psychological progress of contacts on any account.
+Warm-up actions are actions that will take at any point in time to help move the psychological progress of contacts on any account.
 Our ADRs stay connected with Fleet’s engineering team to keep technical knowledge current and to coordinate any outreach. Everyone’s time is valuable, and this approach ensures that prospects have direct access to engineers who speak their language. (Munki, DDM, patch management, EPSS, etc.)
 
 
@@ -456,10 +459,14 @@ The goal of a slide deck is not necessarily to walk every customer through it.  
 Even if you never show these decks on a screenshare, use them to keep the conversation on track, or to send as a teaser.
 
 - [Fleet for IT engineers and IT admins](https://docs.google.com/presentation/d/1WTyGrmA4pSB7H8BeT14BF7peozBceToW8TK__doyQTg/edit?slide=id.g3d7b8aeb1bc_1_182#slide=id.g3d7b8aeb1bc_1_182)
+- [Fleet for digital workplace leaders](https://drive.google.com/file/d/1JlIV1PY5lECQQmq2H_eR35haeKefHXIf/view?usp=sharing)
+- [Fleet for partners](https://docs.google.com/presentation/d/1iNvn5EYnkklKxguYzrOh6ZNvZee53OqAlF3rc_Da_Us/edit?slide=id.g3871afd58d8_0_0#slide=id.g3871afd58d8_0_0)
+
+<!--
 - [Fleet for digital workplace leaders](https://docs.google.com/presentation/d/1G8BtuhYRX92He3AifA5TAW4YlZO3jlcj8OeCqcSHmOM/edit?slide=id.g3d28ee536a1_2_37#slide=id.g3d28ee536a1_2_37)
 - [Fleet for CISOs](https://docs.google.com/presentation/d/17PUAqa63jTb5yFT3hGg3F5mgGyPtUmg8OlTGyxS6vLI/edit?slide=id.g3d28ee536a1_2_0#slide=id.g3d28ee536a1_2_0)
 - [Fleet for CIOs](https://docs.google.com/presentation/d/14GpQs83B_nxTe2hbf2eOJDU6i0OaGnNvXSX7b47boBA/edit?slide=id.g3e7bfd82431_0_29#slide=id.g3e7bfd82431_0_29)
-- [Fleet for partners](https://docs.google.com/presentation/d/1iNvn5EYnkklKxguYzrOh6ZNvZee53OqAlF3rc_Da_Us/edit?slide=id.g3871afd58d8_0_0#slide=id.g3871afd58d8_0_0)
+-->
 
 
 <meta name="maintainedBy" value="sampfluger88">
