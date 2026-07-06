@@ -1,0 +1,1 @@
+* Fixed `CleanupExpiredHosts` cron job failing with "Prepared statement contains too many placeholders" when there are millions of expired hosts by batching SQL IN clauses.
