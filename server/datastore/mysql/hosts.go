@@ -3963,11 +3963,19 @@ func (ds *Datastore) CleanupExpiredHosts(ctx context.Context) ([]fleet.DeletedHo
 	}
 
 	// Get host details before deletion for activity creation
+	const expiredHostsBatchSize = 10000
 	var hostsToDelete []*fleet.Host
 	if len(allIdsToDelete) > 0 {
-		hostsToDelete, err = ds.ListHostsLiteByIDs(ctx, allIdsToDelete)
+		err = common_mysql.BatchProcessSimple(allIdsToDelete, expiredHostsBatchSize, func(batch []uint) error {
+			hosts, err := ds.ListHostsLiteByIDs(ctx, batch)
+			if err != nil {
+				return ctxerr.Wrap(ctx, err, "get host details for expired hosts")
+			}
+			hostsToDelete = append(hostsToDelete, hosts...)
+			return nil
+		})
 		if err != nil {
-			return nil, ctxerr.Wrap(ctx, err, "get host details for expired hosts")
+			return nil, err
 		}
 	}
 
@@ -3979,13 +3987,19 @@ func (ds *Datastore) CleanupExpiredHosts(ctx context.Context) ([]fleet.DeletedHo
 	}
 
 	if len(allIdsToDelete) > 0 {
-		sqlQuery, args, err := sqlx.In(`DELETE FROM host_seen_times WHERE host_id in (?)`, allIdsToDelete)
+		err = common_mysql.BatchProcessSimple(allIdsToDelete, expiredHostsBatchSize, func(batch []uint) error {
+			sqlQuery, args, err := sqlx.In(`DELETE FROM host_seen_times WHERE host_id in (?)`, batch)
+			if err != nil {
+				return ctxerr.Wrap(ctx, err, "building query to delete host seen times")
+			}
+			_, err = ds.writer(ctx).ExecContext(ctx, sqlQuery, args...)
+			if err != nil {
+				return ctxerr.Wrap(ctx, err, "deleting expired host seen times")
+			}
+			return nil
+		})
 		if err != nil {
-			return nil, ctxerr.Wrap(ctx, err, "building query to delete host seen times")
-		}
-		_, err = ds.writer(ctx).ExecContext(ctx, sqlQuery, args...)
-		if err != nil {
-			return nil, ctxerr.Wrap(ctx, err, "deleting expired host seen times")
+			return nil, err
 		}
 	}
 

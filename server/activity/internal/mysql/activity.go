@@ -235,14 +235,18 @@ func (ds *Datastore) CleanupHostActivities(ctx context.Context, hostIDs []uint) 
 		return nil
 	}
 
-	stmt, args, err := sqlx.In(`DELETE FROM activity_host_past WHERE host_id IN (?)`, hostIDs)
-	if err != nil {
-		return ctxerr.Wrap(ctx, err, "build activity_host_past IN query")
-	}
-	if _, err := ds.primary.ExecContext(ctx, stmt, args...); err != nil {
-		return ctxerr.Wrap(ctx, err, "delete activity_host_past for deleted hosts")
-	}
-	return nil
+	const batchSize = 10000
+	return platform_mysql.BatchProcessSimple(hostIDs, batchSize, func(batch []uint) error {
+		stmt, args, err := sqlx.In(`DELETE FROM activity_host_past WHERE host_id IN (?)`, batch)
+		if err != nil {
+			return ctxerr.Wrap(ctx, err, "building query to cleanup host activities")
+		}
+		_, err = ds.primary.ExecContext(ctx, stmt, args...)
+		if err != nil {
+			return ctxerr.Wrap(ctx, err, "cleanup host activities")
+		}
+		return nil
+	})
 }
 
 // fetchActivityDetails fetches details for activities in a separate query
